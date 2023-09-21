@@ -116,7 +116,7 @@ export class HTMLRewriter {
       flush: () => rewriter.end(),
     });
     const promise = body.pipeTo(transformStream.writable);
-    promise.catch(() => {}).finally(() => rewriter?.free());
+    promise.catch((err) => {console.error(err)}).finally(() => rewriter?.free());
 
     // Return a response with the transformed body, copying over headers, etc
     const res = new Response(transformStream.readable, response);
